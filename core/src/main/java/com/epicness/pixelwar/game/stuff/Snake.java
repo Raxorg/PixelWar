@@ -1,5 +1,6 @@
 package com.epicness.pixelwar.game.stuff;
 
+import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled;
 import static com.epicness.pixelwar.game.constants.GameConstants.SNAKE_HEAD_RADIUS;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -23,10 +24,14 @@ public class Snake extends Circle {
 
     @Override
     public void draw(ShapeRenderer shapeRenderer) {
+        super.draw(shapeRenderer);
+    }
+
+    public void drawTrail(ShapeRenderer shapeRenderer) {
+        shapeRenderer.set(Filled);
         for (int i = 0; i < lines.size; i++) {
             lines.get(i).draw(shapeRenderer);
         }
-        super.draw(shapeRenderer);
     }
 
     public GridDot getOrigin() {

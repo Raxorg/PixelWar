@@ -5,6 +5,7 @@ import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Line;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.epicness.fundamentals.stuff.interfaces.Movable;
 
 public class Circle implements Movable {
@@ -40,6 +41,10 @@ public class Circle implements Movable {
 
     public float getCenterX() {
         return x;
+    }
+
+    public Vector2 getCenter() {
+        return new Vector2(x, y);
     }
 
     public float getEndX() {

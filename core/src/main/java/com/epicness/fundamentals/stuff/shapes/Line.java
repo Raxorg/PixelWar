@@ -32,6 +32,10 @@ public class Line {
         y2 = point.y;
     }
 
+    public Color getColor() {
+        return color;
+    }
+
     public void setColor(Color color) {
         this.color = color;
     }

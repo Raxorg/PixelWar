@@ -1,7 +1,6 @@
 package com.epicness.pixelwar.game.logic;
 
 import static com.badlogic.gdx.graphics.Color.CLEAR;
-import static com.badlogic.gdx.graphics.Color.GRAY;
 import static com.epicness.pixelwar.game.constants.GameConstants.LINE_DISAPPEARANCE;
 import static com.epicness.pixelwar.game.constants.GameConstants.LINE_EXPIRATION;
 
@@ -38,22 +37,44 @@ public class TrailHandler extends GameLogicHandler {
 
     private void updateLines(DelayedRemovalArray<GridLine> lines, float delta) {
         lines.begin();
-        for (int i = 0; i < lines.size; i++) {
-            GridLine line = lines.get(i);
+        for (int l = 0; l < lines.size; l++) {
+            GridLine line = lines.get(l);
             float time = line.time += delta;
             if (time >= LINE_EXPIRATION) {
                 float progress = Math.min(MathUtils.map(LINE_EXPIRATION, LINE_DISAPPEARANCE, 0f, 1f, time), 1f);
                 line.setColor(line.initialColor.cpy().lerp(CLEAR, progress));
-                if (line.origin.connectedLines.size <= 2) {
-                    line.origin.setColor(line.initialColor.cpy().lerp(GRAY, progress));
-                }
+
+                updateOriginDotColor(line);
+
                 if (time >= LINE_DISAPPEARANCE) {
-                    line.origin.connectedLines.removeValue(line, true);
-                    line.ending.connectedLines.removeValue(line, true);
+                    line.origin.outLines.removeValue(line, true);
+                    line.ending.inLines.removeValue(line, true);
                     lines.removeValue(line, true);
                 }
             }
         }
         lines.end();
+    }
+
+    private void updateOriginDotColor(GridLine line) {
+        GridLine strongestLine = line;
+        GridDot origin = line.origin;
+        float strongestA = line.getColor().a;
+        for (int i = 0; i < origin.inLines.size; i++) {
+            float a = origin.inLines.get(i).getColor().a;
+            if (a > strongestA) {
+                strongestLine = origin.inLines.get(i);
+                strongestA = a;
+            }
+        }
+        for (int i = 0; i < origin.outLines.size; i++) {
+            float a = origin.outLines.get(i).getColor().a;
+            if (a > strongestA) {
+                strongestLine = origin.outLines.get(i);
+                strongestA = a;
+            }
+        }
+        float alpha = strongestLine.getColor().a;
+        origin.setColor(origin.getInitialColor().cpy().lerp(strongestLine.getColor(), alpha));
     }
 }

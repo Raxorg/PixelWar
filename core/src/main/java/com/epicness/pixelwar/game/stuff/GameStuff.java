@@ -4,6 +4,7 @@ import static com.epicness.fundamentals.constants.Direction.LEFT;
 import static com.epicness.fundamentals.constants.Direction.RIGHT;
 
 import com.epicness.fundamentals.stuff.Stuff;
+import com.epicness.fundamentals.stuff.Text;
 import com.epicness.fundamentals.utils.Random;
 import com.epicness.pixelwar.game.assets.GameAssets;
 

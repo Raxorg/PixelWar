@@ -24,6 +24,7 @@ public class GridColorer extends GameLogicHandler {
                     progress -= 2f;
                 }
                 float alpha = progress > 1f ? 2f - progress : progress;
+                alpha = Math.min(alpha, 0.4f);
                 Color color = square.getInitialColor().cpy().lerp(CLEAR, alpha);
                 square.setColor(color);
             }

@@ -8,6 +8,7 @@ public class GameLogic extends Logic {
     private final SnakeController snakeController;
 
     public GameLogic() {
+        registerHandler(new CaptureHandler());
         registerHandler(new GameInputHandler());
         registerHandler(gridColorer = new GridColorer());
         registerHandler(snakeController = new SnakeController());

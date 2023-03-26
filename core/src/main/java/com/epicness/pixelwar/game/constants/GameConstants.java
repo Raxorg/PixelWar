@@ -16,7 +16,7 @@ public class GameConstants {
     public static final float GRID_HORIZONTAL_MARGIN = (CAMERA_WIDTH - GRID_CELL_COLUMNS * CELL_SIZE) / 2f;
     public static final int GRID_DOT_COLUMNS = GRID_CELL_COLUMNS + 1;
     public static final int GRID_DOT_ROWS = GRID_CELL_ROWS + 1;
-    public static final float GRID_DOT_RADIUS = 5f;
+    public static final float GRID_DOT_RADIUS = 4f;
     // Player 1
     public static final int STARTING_COLUMN_1 = 0;
     public static final int STARTING_ROW_1 = 0;
@@ -28,10 +28,10 @@ public class GameConstants {
     public static final int INITIAL_DESTINATION_COLUMN_2 = GRID_CELL_COLUMNS - 1;
     public static final int INITIAL_DESTINATION_ROW_2 = GRID_CELL_ROWS;
     // Snakes
-    public static final float SNAKE_HEAD_RADIUS = 7f;
-    public static final float DEFAULT_CELLS_PER_SECOND = 4f;
-    public static final float LINE_WIDTH = 3f;
+    public static final float SNAKE_HEAD_RADIUS = 9f;
+    public static final float DEFAULT_CELLS_PER_SECOND = 7f;
+    public static final float LINE_WIDTH = 5f;
     // Trail
-    public static final float LINE_EXPIRATION = 4f;
+    public static final float LINE_EXPIRATION = 5f;
     public static final float LINE_DISAPPEARANCE = LINE_EXPIRATION + 1f;
 }

@@ -15,6 +15,8 @@ public class GameRenderer extends Renderer<GameStuff> {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         ScreenUtils.clear(BLACK);
         shapeRenderer.begin();
+        stuff.getSnake1().drawTrail(shapeRenderer);
+        stuff.getSnake2().drawTrail(shapeRenderer);
         stuff.getPixelGrid().draw(shapeRenderer);
         stuff.getSnake1().draw(shapeRenderer);
         stuff.getSnake2().draw(shapeRenderer);

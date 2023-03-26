@@ -14,9 +14,8 @@ public class GridLine extends Line {
     public GridLine(GridDot origin, GridDot ending, Color initialColor) {
         super(LINE_WIDTH);
         this.origin = origin;
-        this.origin.connectedLines.add(this);
+        this.origin.outLines.add(this);
         this.ending = ending;
-        this.ending.connectedLines.add(this);
         this.initialColor = initialColor;
         setColor(initialColor);
     }

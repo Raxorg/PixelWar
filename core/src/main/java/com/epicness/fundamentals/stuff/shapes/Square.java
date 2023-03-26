@@ -4,6 +4,7 @@ import static com.badlogic.gdx.graphics.Color.GRAY;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.epicness.fundamentals.stuff.interfaces.Movable;
 import com.epicness.fundamentals.stuff.interfaces.Scalable;
 
@@ -23,6 +24,10 @@ public class Square implements Movable, Scalable {
     public void draw(ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(color);
         shapeRenderer.rect(x, y, width, height);
+    }
+
+    public Vector2 getCenter() {
+        return new Vector2(x + width / 2f, y + height / 2f);
     }
 
     @Override

@@ -50,6 +50,10 @@ public class SnakeController extends GameLogicHandler {
         logic.get(TrailHandler.class).update(snake, delta);
         if (progress == 1f) {
             snake.setOrigin(destination);
+            snake.getDestination().inLines.add(snake.lines.get(snake.lines.size - 1));
+            if (destination.getColor().equals(snake.getColor())) {
+                logic.get(CaptureHandler.class).ownDotReached(snake);
+            }
             logic.get(SnakeTurner.class).turn(snake);
             logic.get(TrailHandler.class).spawnTrail(snake);
             snake.setProgress(0f);
