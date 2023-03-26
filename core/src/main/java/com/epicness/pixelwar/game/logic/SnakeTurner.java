@@ -6,62 +6,66 @@ import static com.epicness.fundamentals.constants.Direction.RIGHT;
 import static com.epicness.fundamentals.constants.Direction.UP;
 import static com.epicness.pixelwar.game.constants.GameConstants.GRID_DOT_COLUMNS;
 import static com.epicness.pixelwar.game.constants.GameConstants.GRID_DOT_ROWS;
-import static com.epicness.pixelwar.game.constants.GameConstants.INITIAL_DESTINATION_COLUMN;
-import static com.epicness.pixelwar.game.constants.GameConstants.INITIAL_DESTINATION_ROW;
+import static com.epicness.pixelwar.game.constants.GameConstants.INITIAL_DESTINATION_COLUMN_1;
+import static com.epicness.pixelwar.game.constants.GameConstants.INITIAL_DESTINATION_COLUMN_2;
+import static com.epicness.pixelwar.game.constants.GameConstants.INITIAL_DESTINATION_ROW_1;
+import static com.epicness.pixelwar.game.constants.GameConstants.INITIAL_DESTINATION_ROW_2;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.epicness.fundamentals.constants.Direction;
-import com.epicness.fundamentals.stuff.shapes.Circle;
 import com.epicness.pixelwar.game.stuff.GridDot;
+import com.epicness.pixelwar.game.stuff.Snake;
 
 public class SnakeTurner extends GameLogicHandler {
 
-    private Direction direction;
-    private int destinationColumn, destinationRow;
-
     @Override
     protected void init() {
-        direction = RIGHT;
-        destinationColumn = INITIAL_DESTINATION_COLUMN;
-        destinationRow = INITIAL_DESTINATION_ROW;
+        stuff.getSnake1().setDestinationColumn(INITIAL_DESTINATION_COLUMN_1);
+        stuff.getSnake1().setDestinationRow(INITIAL_DESTINATION_ROW_1);
+        stuff.getSnake2().setDestinationColumn(INITIAL_DESTINATION_COLUMN_2);
+        stuff.getSnake2().setDestinationRow(INITIAL_DESTINATION_ROW_2);
     }
 
-    public void setNextDirection(Direction direction) {
-        this.direction = direction;
+    public void setNextDirection(Snake snake, Direction direction) {
+        snake.setDirection(direction);
     }
 
-    public Void turn() {
-        switch (direction) {
+    public Void turn(Snake snake) {
+        int destinationColumn = snake.getDestinationColumn();
+        int destinationRow = snake.getDestinationRow();
+        switch (snake.getDirection()) {
             case UP:
                 if (++destinationRow >= GRID_DOT_ROWS) {
-                    destinationRow--;
-                    direction = MathUtils.randomBoolean() ? LEFT : RIGHT;
-                    return turn();
+                    snake.setDestinationRow(destinationRow - 1);
+                    snake.setDirection(MathUtils.randomBoolean() ? LEFT : RIGHT);
+                    return turn(snake);
                 }
                 break;
             case LEFT:
                 if (--destinationColumn < 0) {
-                    destinationColumn++;
-                    direction = MathUtils.randomBoolean() ? UP : DOWN;
-                    return turn();
+                    snake.setDestinationColumn(destinationColumn + 1);
+                    snake.setDirection(MathUtils.randomBoolean() ? UP : DOWN);
+                    return turn(snake);
                 }
                 break;
             case DOWN:
                 if (--destinationRow < 0) {
-                    destinationRow++;
-                    direction = MathUtils.randomBoolean() ? LEFT : RIGHT;
-                    return turn();
+                    snake.setDestinationRow(destinationRow + 1);
+                    snake.setDirection(MathUtils.randomBoolean() ? LEFT : RIGHT);
+                    return turn(snake);
                 }
                 break;
             case RIGHT:
                 if (++destinationColumn >= GRID_DOT_COLUMNS) {
-                    destinationColumn--;
-                    direction = MathUtils.randomBoolean() ? UP : DOWN;
-                    return turn();
+                    snake.setDestinationColumn(destinationColumn - 1);
+                    snake.setDirection(MathUtils.randomBoolean() ? UP : DOWN);
+                    return turn(snake);
                 }
         }
+        snake.setDestinationColumn(destinationColumn);
+        snake.setDestinationRow(destinationRow);
         GridDot destination = stuff.getPixelGrid().dots[destinationColumn][destinationRow];
-        logic.get(SnakeController.class).setDestination(destination);
+        snake.setDestination(destination);
         return null;
     }
 }

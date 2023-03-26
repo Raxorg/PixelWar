@@ -74,6 +74,10 @@ public class Circle implements Movable {
         this.radius = radius;
     }
 
+    public Color getColor() {
+        return color;
+    }
+
     public void setColor(Color color) {
         this.color = color;
     }

@@ -5,25 +5,28 @@ import static com.badlogic.gdx.graphics.Color.GRAY;
 import static com.epicness.pixelwar.game.constants.GameConstants.LINE_DISAPPEARANCE;
 import static com.epicness.pixelwar.game.constants.GameConstants.LINE_EXPIRATION;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.epicness.pixelwar.game.stuff.GridDot;
 import com.epicness.pixelwar.game.stuff.GridLine;
+import com.epicness.pixelwar.game.stuff.Snake;
 
 public class TrailHandler extends GameLogicHandler {
 
-    public void spawnTrail(GridDot origin, GridDot ending, Color color) {
-        origin.setColor(color);
-        GridLine line = new GridLine(origin, ending, color);
+    public void spawnTrail(Snake snake) {
+        GridDot origin = snake.getOrigin();
+        GridDot ending = snake.getDestination();
+        origin.setColor(snake.getColor());
+        GridLine line = new GridLine(origin, ending, snake.getColor());
         line.setPoint1(origin.getPosition());
         line.setPoint2(origin.getPosition());
-        stuff.getLines().add(line);
+        snake.lines.add(line);
     }
 
-    public void update(Vector2 position, float delta) {
-        DelayedRemovalArray<GridLine> lines = stuff.getLines();
+    public void update(Snake snake, float delta) {
+        DelayedRemovalArray<GridLine> lines = snake.lines;
+        Vector2 position = snake.getPosition();
         updateTrail(lines, position);
         updateLines(lines, delta);
     }

@@ -1,37 +1,37 @@
 package com.epicness.pixelwar.game.stuff;
 
-import static com.badlogic.gdx.graphics.Color.WHITE;
-import static com.epicness.pixelwar.game.constants.GameConstants.SNAKE_HEAD_RADIUS;
+import static com.epicness.fundamentals.constants.Direction.LEFT;
+import static com.epicness.fundamentals.constants.Direction.RIGHT;
 
-import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.epicness.fundamentals.stuff.Stuff;
-import com.epicness.fundamentals.stuff.shapes.Circle;
+import com.epicness.fundamentals.utils.Random;
 import com.epicness.pixelwar.game.assets.GameAssets;
 
 public class GameStuff extends Stuff<GameAssets> {
 
     private PixelGrid pixelGrid;
-    private DelayedRemovalArray<GridLine> lines;
-    private Circle snakeHead;
+    private Snake player1, player2;
 
     @Override
     public void initializeStuff() {
         pixelGrid = new PixelGrid();
-        lines = new DelayedRemovalArray<>();
 
-        snakeHead = new Circle(SNAKE_HEAD_RADIUS);
-        snakeHead.setColor(WHITE);
+        player1 = new Snake(RIGHT);
+        player1.setColor(Random.rainbowColor());
+
+        player2 = new Snake(LEFT);
+        player2.setColor(Random.rainbowExcludedColor(player1.getColor()));
     }
 
     public PixelGrid getPixelGrid() {
         return pixelGrid;
     }
 
-    public DelayedRemovalArray<GridLine> getLines() {
-        return lines;
+    public Snake getSnake1() {
+        return player1;
     }
 
-    public Circle getSnakeHead() {
-        return snakeHead;
+    public Snake getSnake2() {
+        return player2;
     }
 }

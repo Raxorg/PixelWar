@@ -17,13 +17,19 @@ public class GameConstants {
     public static final int GRID_DOT_COLUMNS = GRID_CELL_COLUMNS + 1;
     public static final int GRID_DOT_ROWS = GRID_CELL_ROWS + 1;
     public static final float GRID_DOT_RADIUS = 5f;
-    // Snake
+    // Player 1
+    public static final int STARTING_COLUMN_1 = 0;
+    public static final int STARTING_ROW_1 = 0;
+    public static final int INITIAL_DESTINATION_COLUMN_1 = 1;
+    public static final int INITIAL_DESTINATION_ROW_1 = 0;
+    // Player 2
+    public static final int STARTING_COLUMN_2 = GRID_CELL_COLUMNS;
+    public static final int STARTING_ROW_2 = GRID_CELL_ROWS;
+    public static final int INITIAL_DESTINATION_COLUMN_2 = GRID_CELL_COLUMNS - 1;
+    public static final int INITIAL_DESTINATION_ROW_2 = GRID_CELL_ROWS;
+    // Snakes
     public static final float SNAKE_HEAD_RADIUS = 7f;
-    public static final int STARTING_COLUMN = 0;
-    public static final int STARTING_ROW = 0;
-    public static final int INITIAL_DESTINATION_COLUMN = 1;
-    public static final int INITIAL_DESTINATION_ROW = 0;
-    public static final float CELLS_PER_SECOND = 4f;
+    public static final float DEFAULT_CELLS_PER_SECOND = 4f;
     public static final float LINE_WIDTH = 3f;
     // Trail
     public static final float LINE_EXPIRATION = 4f;

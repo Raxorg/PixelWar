@@ -16,10 +16,8 @@ public class GameRenderer extends Renderer<GameStuff> {
         ScreenUtils.clear(BLACK);
         shapeRenderer.begin();
         stuff.getPixelGrid().draw(shapeRenderer);
-        for (int i = 0; i < stuff.getLines().size; i++) {
-            stuff.getLines().get(i).draw(shapeRenderer);
-        }
-        stuff.getSnakeHead().draw(shapeRenderer);
+        stuff.getSnake1().draw(shapeRenderer);
+        stuff.getSnake2().draw(shapeRenderer);
         shapeRenderer.end();
     }
 }
